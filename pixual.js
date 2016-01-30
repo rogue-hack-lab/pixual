@@ -20,20 +20,34 @@ function startGame () {
 	rows = 2;
 	cols = 2;
 	score = 0;
-	levelUp();
+	drawBoxes();
 	countdown( "countdown", 1, 0 );
 }
 
 function levelUp() {
 	time = new Date( msLeft );
-	score += ((rows-2) * time.getUTCSeconds());
+	score += ((rows-1) * time.getUTCSeconds());
 	$('#points').html(score);
+	rows++;
+	cols++;
+	drawBoxes();
+}
 
+function endGame () {
+	$('#startBtn').show();
+	$('#canvas').hide();
+	$('#canvas2').hide();
+}
+
+function drawBoxes () {
 	diffx = Math.floor(Math.random()*cols);
 	diffy = Math.floor(Math.random()*rows);
+	
 	cw = canvas.width / cols;
 	ch = canvas.height / rows;
+	
 	console.log('x: ' + diffx + ' y: '+diffy);
+	
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
 			color = getRandomColor();
@@ -46,12 +60,6 @@ function levelUp() {
 			ctx2.fillRect(x * cw, y * ch, cw, ch);
 		}
 	}
-}
-
-function endGame () {
-	$('#startBtn').show();
-	$('#canvas').hide();
-	$('#canvas2').hide();
 }
 
 canvas.addEventListener('click', function(event) {
@@ -67,8 +75,6 @@ function checkClick (event,canvas_ref) {
 	y = event.pageY - canvas_ref.offsetTop;
 	console.log(Math.floor(x/cw), Math.floor(y/ch));
 	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
-		rows++;
-		cols++;
 		levelUp();
 	}
 }

@@ -29,9 +29,19 @@ function loop() {
     }
 };
 
+canvas.addEventListener('click', function(event) {
+    checkClick(event,this);
+}, false);
+
 canvas2.addEventListener('click', function(event) {
-    var x = event.pageX - this.offsetLeft,
-        y = event.pageY - this.offsetTop;
+    checkClick(event,this);
+}, false);
+
+loop();
+
+function checkClick (event,canvas_ref) {
+    var x = event.pageX - canvas_ref.offsetLeft,
+        y = event.pageY - canvas_ref.offsetTop;
     console.log(Math.floor(x/cw), Math.floor(y/ch));
     if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
         //alert('Win');
@@ -39,11 +49,7 @@ canvas2.addEventListener('click', function(event) {
         cols++;
         loop();
     }
-}, false);
-
-loop();
-
-//setInterval(loop, 2000);
+}
 
 function getRandomColor() {
     return 'rgb(' + 
@@ -80,4 +86,4 @@ function countdown( elementName, minutes, seconds )
     updateTimer();
 }
 
-countdown( "countdown", 1, 5 );
+countdown( "countdown", 1, 0 );

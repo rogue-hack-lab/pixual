@@ -7,12 +7,28 @@ cols = 2,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 30,
-badClickPenalty = 10;
+badClickPenalty = 10,
+score = 0;
 
 var diffx, diffy;
+var element, endTime, hours, mins, msLeft, time;
 
+function startGame () {
+	$('#startBtn').hide();
+	$('#canvas').show();
+	$('#canvas2').show();
+	rows = 2;
+	cols = 2;
+	score = 0;
+	levelUp();
+	countdown( "countdown", 1, 0 );
+}
 
-function loop() {
+function levelUp() {
+	time = new Date( msLeft );
+	score += ((rows-2) * time.getUTCSeconds());
+	$('#points').html(score);
+
 	diffx = Math.floor(Math.random()*cols);
 	diffy = Math.floor(Math.random()*rows);
 	cw = canvas.width / cols;
@@ -30,7 +46,13 @@ function loop() {
 			ctx2.fillRect(x * cw, y * ch, cw, ch);
 		}
 	}
-};
+}
+
+function endGame () {
+	$('#startBtn').show();
+	$('#canvas').hide();
+	$('#canvas2').hide();
+}
 
 canvas.addEventListener('click', function(event) {
 	checkClick(event,this);
@@ -40,8 +62,6 @@ canvas2.addEventListener('click', function(event) {
 	checkClick(event,this);
 }, false);
 
-loop();
-
 function checkClick (event,canvas_ref) {
 	var x = event.pageX - canvas_ref.offsetLeft,
 	y = event.pageY - canvas_ref.offsetTop;
@@ -49,7 +69,7 @@ function checkClick (event,canvas_ref) {
 	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
 		rows++;
 		cols++;
-		loop();
+		levelUp();
 	}
 }
 
@@ -61,7 +81,6 @@ function getRandomColor() {
 }
 
 function countdown( elementName, minutes, seconds ){
-	var element, endTime, hours, mins, msLeft, time;
 
 	function twoDigits( n ){
 		return (n <= 9 ? "0" + n : n);
@@ -71,6 +90,7 @@ function countdown( elementName, minutes, seconds ){
 		msLeft = endTime - (+new Date);
 		if ( msLeft < 1000 ) {
 			element.innerHTML = "countdown's over!";
+			endGame();
 		} else {
 			time = new Date( msLeft );
 			hours = time.getUTCHours();
@@ -84,5 +104,3 @@ function countdown( elementName, minutes, seconds ){
 	endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 	updateTimer();
 }
-
-countdown( "countdown", 1, 0 );

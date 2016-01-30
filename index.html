@@ -10,13 +10,23 @@
 
 	<div class="text-center">
 		<h1>Pixual!</h1>
-		<h3><span id="countdown"></span><h3>
-			<canvas id="canvas" width=500 height=500></canvas>
-			<canvas id="canvas2" width=500 height=500></canvas>
+		<div class="row">
+			<div class="col-md-3 col-md-offset-3">
+				<h3><span id="countdown"></span></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><span id="points">0</span></h3>
+			</div>	
 		</div>
+		<div class="text-center">
+			<input class="btn btn-default" type="button" id="startBtn" value="Start" onclick="startGame()">
+		</div>
+		<canvas id="canvas" width=500 height=500></canvas>
+		<canvas id="canvas2" width=500 height=500></canvas>
+	</div>
 
-		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<script src="pixual.js"></script>
-	</body>
-	</html>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="pixual.js"></script>
+</body>
+</html>

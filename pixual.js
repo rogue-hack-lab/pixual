@@ -6,8 +6,8 @@ rows = 2,
 cols = 2,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
-goodClickBonus = 30,
-badClickPenalty = 10,
+goodClickBonus = 0,
+badClickPenalty = 1,
 score = 0;
 
 var diffx, diffy;
@@ -31,6 +31,11 @@ function levelUp() {
 	rows++;
 	cols++;
 	drawBoxes();
+}
+
+function oops () {
+	endTime -= badClickPenalty*1000;
+	updateTimer();
 }
 
 function endGame () {
@@ -76,6 +81,8 @@ function checkClick (event,canvas_ref) {
 	console.log(Math.floor(x/cw), Math.floor(y/ch));
 	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
 		levelUp();
+	}else{
+		oops();
 	}
 }
 
@@ -86,26 +93,26 @@ function getRandomColor() {
 		((Math.random() * 255)|0) + ')';
 }
 
+
+function twoDigits( n ){
+	return (n <= 9 ? "0" + n : n);
+}
+
+function updateTimer(){
+	msLeft = endTime - (+new Date);
+	if ( msLeft < 1000 ) {
+		element.innerHTML = "countdown's over!";
+		endGame();
+	} else {
+		time = new Date( msLeft );
+		hours = time.getUTCHours();
+		mins = time.getUTCMinutes();
+		element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+		setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+	}
+}
+
 function countdown( elementName, minutes, seconds ){
-
-	function twoDigits( n ){
-		return (n <= 9 ? "0" + n : n);
-	}
-
-	function updateTimer(){
-		msLeft = endTime - (+new Date);
-		if ( msLeft < 1000 ) {
-			element.innerHTML = "countdown's over!";
-			endGame();
-		} else {
-			time = new Date( msLeft );
-			hours = time.getUTCHours();
-			mins = time.getUTCMinutes();
-			element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-			setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-		}
-	}
-
 	element = document.getElementById( elementName );
 	endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 	updateTimer();

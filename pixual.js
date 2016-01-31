@@ -95,7 +95,6 @@ function checkClick (event,canvas_ref) {
 
 function getRandomColor(color) {
 	do {
-		console.log(color);
 		var r = webSafeColors[random()];
 		var g = webSafeColors[random()];
 		var b = webSafeColors[random()];

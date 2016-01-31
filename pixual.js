@@ -2,13 +2,14 @@ var canvas = document.getElementById('canvas'),
 ctx = canvas.getContext('2d'),
 canvas2 = document.getElementById('canvas2'),
 ctx2 = canvas2.getContext('2d'),
-rows = 2,
-cols = 2,
+rows = 1,
+cols = 1,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 0,
 badClickPenalty = 1,
-score = 0;
+score = 0,
+gameActive = false;
 
 var diffx, diffy;
 var element, endTime, hours, mins, msLeft, time;
@@ -18,7 +19,10 @@ var random = function() {
 	return Math.floor(Math.random()*6);
 }
 
+drawBoxes();
+
 function startGame () {
+	gameActive = true;
 	$('#startBtn').hide();
 	$('#canvas').show();
 	$('#canvas2').show();
@@ -44,9 +48,10 @@ function oops () {
 }
 
 function endGame () {
+	gameActive = false;
 	$('#startBtn').show();
-	$('#canvas').hide();
-	$('#canvas2').hide();
+	// $('#canvas').hide();
+	// $('#canvas2').hide();
 }
 
 function drawBoxes () {
@@ -83,12 +88,14 @@ canvas2.addEventListener('click', function(event) {
 }, false);
 
 function checkClick (event,canvas_ref) {
-	var x = event.pageX - canvas_ref.offsetLeft,
-	y = event.pageY - canvas_ref.offsetTop;
-	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
-		levelUp();
-	}else{
-		oops();
+	if (gameActive == true) {
+		var x = event.pageX - canvas_ref.offsetLeft,
+		y = event.pageY - canvas_ref.offsetTop;
+		if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
+			levelUp();
+		}else{
+			oops();
+		}	
 	}
 }
 

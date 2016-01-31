@@ -10,3 +10,7 @@ body {
 #canvas2 {
 	display: none;
 }
+
+#footer {
+	padding-top: 1.4em;
+}

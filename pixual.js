@@ -30,7 +30,7 @@ function startGame () {
 	level = 2;
 	score = 0;
 	drawBoxes();
-	countdown( "countdown", 10, 0 );
+	countdown( "countdown", 1, 0 );
 }
 
 function levelUp() {

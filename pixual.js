@@ -56,7 +56,7 @@ function drawBoxes () {
 	cw = canvas.width / cols;
 	ch = canvas.height / rows;
 
-	console.log('x: ' + diffx + ' y: '+diffy);
+	//console.log('x: ' + diffx + ' y: '+diffy);
 
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
@@ -85,7 +85,6 @@ canvas2.addEventListener('click', function(event) {
 function checkClick (event,canvas_ref) {
 	var x = event.pageX - canvas_ref.offsetLeft,
 	y = event.pageY - canvas_ref.offsetTop;
-	console.log(Math.floor(x/cw), Math.floor(y/ch));
 	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
 		levelUp();
 	}else{

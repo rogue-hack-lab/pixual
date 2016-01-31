@@ -61,7 +61,7 @@ function drawBoxes () {
 	cw = canvas.width / cols;
 	ch = canvas.height / rows;
 
-	//console.log('x: ' + diffx + ' y: '+diffy);
+	console.log('+ x: ' + diffx + ' y: '+diffy);
 
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
@@ -91,7 +91,13 @@ function checkClick (event,canvas_ref) {
 	if (gameActive == true) {
 		var x = event.pageX - canvas_ref.offsetLeft,
 		y = event.pageY - canvas_ref.offsetTop;
-		if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
+		
+		var clickx = Math.floor(x/cw),
+		clicky = Math.floor(y/ch);
+		
+		console.log('- x: ' + clickx + ' y: '+clicky);
+
+		if(diffx == clickx & diffy == clicky) {
 			levelUp();
 		}else{
 			oops();

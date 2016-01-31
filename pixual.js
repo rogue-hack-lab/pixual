@@ -55,11 +55,12 @@ function drawBoxes () {
 
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
-			color = getRandomColor();
+			color = getRandomColorWebsafe();
 			ctx.fillStyle = color;
 			ctx.fillRect(x * cw, y * ch, cw, ch);
 			if( x == diffx & y == diffy){
-				color = getRandomColor();
+				//color = getRandomColor();
+				color = getRandomColorWebsafe();
 			}
 			ctx2.fillStyle = color;
 			ctx2.fillRect(x * cw, y * ch, cw, ch);
@@ -87,13 +88,32 @@ function checkClick (event,canvas_ref) {
 }
 
 function getRandomColor() {
-	return goldenColors.getHsvGolden(0.99, 0.99).toRgbString();
-	// return 'rgb(' +
-	// 	((Math.random() * 255)|0) + ',' +
-	// 	((Math.random() * 255)|0) + ',' +
-	// 	((Math.random() * 255)|0) + ')';
+	//return goldenColors.getHsvGolden(0.99, 0.99).toRgbString();
+	return 'rgb(' +
+		((Math.random() * 255)|0) + ',' +
+		((Math.random() * 255)|0) + ',' +
+		((Math.random() * 255)|0) + ')';
 }
 
+function getRandomColorHex() {
+	var letters = '0123456789ABCDEF'.split('');
+	var color = '#';
+	for (var i = 0; i < 6; i++ ) {
+		color += letters[Math.round(Math.random() * 15)];
+	}
+	return color;
+}
+
+var webSafeColors = ['00','33','66','99','cc','ff'];
+var random = function() {
+	return Math.floor(Math.random()*6);
+};
+function getRandomColorWebsafe() {
+	var r = webSafeColors[random()];
+	var g = webSafeColors[random()];
+	var b = webSafeColors[random()];
+	return "#"+r+g+b;
+};
 
 function twoDigits( n ){
 	return (n <= 9 ? "0" + n : n);

@@ -2,8 +2,7 @@ var canvas = document.getElementById('canvas'),
 ctx = canvas.getContext('2d'),
 canvas2 = document.getElementById('canvas2'),
 ctx2 = canvas2.getContext('2d'),
-rows = 2,
-cols = 2,
+level = 2,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 0,
@@ -26,8 +25,7 @@ function startGame () {
 	$('#points').html('0');
 	$('#canvas').show();
 	$('#canvas2').show();
-	rows = 2;
-	cols = 2;
+	level = 2;
 	score = 0;
 	drawBoxes();
 	countdown( "countdown", 1, 0 );
@@ -35,10 +33,9 @@ function startGame () {
 
 function levelUp() {
 	time = new Date( msLeft );
-	score += ((rows-1) * time.getUTCSeconds());
+	score += ((level-1) * time.getUTCSeconds());
 	$('#points').html(score);
-	rows++;
-	cols++;
+	level++;
 	drawBoxes();
 }
 
@@ -53,16 +50,16 @@ function endGame () {
 }
 
 function drawBoxes () {
-	diffx = Math.floor(Math.random()*cols);
-	diffy = Math.floor(Math.random()*rows);
+	diffx = Math.floor(Math.random()*level);
+	diffy = Math.floor(Math.random()*level);
 
-	cw = canvas.width / cols;
-	ch = canvas.height / rows;
+	cw = canvas.width / level;
+	ch = canvas.height / level;
 
 	//console.log('x: ' + diffx + ' y: '+diffy);
 
-	for(var y = 0; y < rows; y++) {
-		for(var x = 0; x < cols; x++) {
+	for(var y = 0; y < level; y++) {
+		for(var x = 0; x < level; x++) {
 			var color;
 			color = getRandomColor(color);
 			ctx.fillStyle = color;

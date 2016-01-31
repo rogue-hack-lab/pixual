@@ -5,7 +5,7 @@ ctx2 = canvas2.getContext('2d'),
 level = 1,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
-goodClickBonus = 0,
+goodClickBonus = 5,
 badClickPenalty = -1,
 score = 0,
 gameActive = false;
@@ -26,6 +26,7 @@ function startGame () {
 	$('#stats').show();
 	$('#resetGame').show();
 	$('#points').html('0');
+	$('#level').html('0');
 	gameActive = true;
 	level = 2;
 	score = 0;
@@ -37,8 +38,11 @@ function levelUp() {
 	time = new Date( msLeft );
 	score += ((level-1) * time.getUTCSeconds());
 	$('#points').html(score);
-	level++;
+	$('#level').html(level);
+	level++;	
 	drawBoxes();
+	endTime += goodClickBonus*1000;
+	updateTimer();
 }
 
 function oops () {

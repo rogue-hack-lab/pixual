@@ -2,7 +2,7 @@ var canvas = document.getElementById('canvas'),
 ctx = canvas.getContext('2d'),
 canvas2 = document.getElementById('canvas2'),
 ctx2 = canvas2.getContext('2d'),
-level = 2,
+level = 1,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 0,
@@ -18,7 +18,7 @@ var random = function() {
 	return Math.floor(Math.random()*6);
 }
 
-drawBoxes();
+resizePlayArea();
 
 function startGame () {
 	$('#startGame').hide();
@@ -27,12 +27,10 @@ function startGame () {
 	$('#resetGame').show();
 	$('#points').html('0');
 	gameActive = true;
-	$('#canvas').show();
-	$('#canvas2').show();
 	level = 2;
 	score = 0;
 	drawBoxes();
-	countdown( "countdown", 1, 0 );
+	countdown( "countdown", 10, 0 );
 }
 
 function levelUp() {
@@ -95,7 +93,8 @@ function checkClick (event,canvas_ref) {
 		var clickx = Math.floor(x/cw),
 		clicky = Math.floor(y/ch);
 		
-		console.log('Click x: ' + clickx + ' y: '+clicky);
+		//console.log('Click x: ' + clickx + ' y: '+clicky);
+		console.log('Click x: ' + clickx + '=floor('+x+'/'+cw+') y: '+clicky + '=floor('+y+'/'+ch+')');
 
 		if(diffx == clickx & diffy == clicky) {
 			levelUp();
@@ -142,29 +141,35 @@ function countdown( elementName, minutes, seconds ){
 
 / * not fully working yet -Mica */
 function resizePlayArea() {
-    var playArea = document.getElementById('playArea');
-    var widthToHeight = 4 / 2;
-    var newWidth = window.innerWidth;
-    var newHeight = window.innerHeight;
-    var newWidthToHeight = newWidth / newHeight;
+    // var playArea = document.getElementById('playArea');
+    // var widthToHeight = 4 / 2;
+    // var newWidth = window.innerWidth;
+    // var newHeight = window.innerHeight;
+    // var newWidthToHeight = newWidth / newHeight;
 
-    if (newWidthToHeight > widthToHeight) {
-        newWidth = newHeight * widthToHeight;
-        playArea.style.height = newHeight + 'px';
-        playArea.style.width = newWidth + 'px';
-    } else {
-        newHeight = newWidth / widthToHeight;
-        playArea.style.width = newWidth + 'px';
-        playArea.style.height = newHeight + 'px';
-    }
+    // if (newWidthToHeight > widthToHeight) {
+    //     newWidth = newHeight * widthToHeight;
+    //     playArea.style.height = newHeight + 'px';
+    //     playArea.style.width = newWidth + 'px';
+    // } else {
+    //     newHeight = newWidth / widthToHeight;
+    //     playArea.style.width = newWidth + 'px';
+    //     playArea.style.height = newHeight + 'px';
+    // }
 
-    var playCanvas = document.getElementById('canvas');
-    playCanvas.width = newWidth;
-    playCanvas.height = newHeight;
+    if (window.innerWidth > window.innerHeight) {
+    	var size = window.innerWidth*0.40;
+    }else{
+    	var size = window.innerHeight*0.40;
+    };
 
-		var playCanvas2 = document.getElementById('canvas2');
-		playCanvas2.width = newWidth;
-		playCanvas2.height = newHeight;
+    canvas.width = size;
+    canvas.height = size;
+    canvas2.width = size;
+    canvas2.height = size;
+
+    drawBoxes();
+
 }
 
 window.addEventListener('resize', resizePlayArea, false);

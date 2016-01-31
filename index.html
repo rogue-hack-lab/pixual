@@ -70,18 +70,16 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="home">
 
-				<div class="container">
+
+				<div id="playArea" class="text-center">
+					<canvas id="canvas" class="canvass"></canvas>
+					<canvas id="canvas2" class="canvass2"></canvas>
+				</div>
+
 
 				<div class="statsBar">
 					<h3 id="stats" class="text-center">Clock: <span id="countdown"></span>&nbsp;&nbsp;&nbsp;Points: <span id="points"></span></h3>
 				</div>
-
-				<div id="playArea">
-					<canvas id="canvas" class="canvass" height="480" width="480"></canvas>
-					<canvas id="canvas2" class="canvass2" height="480" width="480"></canvas>
-				</div>
-
-			 </div>
 
 				<div class="row text-center add-padding">
 					<input class="btn btn-default" type="button" id="startGame" value="Start Playing" onclick="startGame()">

@@ -3,7 +3,7 @@ body {
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.playArea {
+/*.playArea {
   position: absolute;
   left:     50%;
   top:      50%;
@@ -11,19 +11,17 @@ body {
 	margin: 0 auto;
 	padding-left: .4em;
 	padding-right: .4em;
-}
+}*/
 
 #canvas {
-	display: none;
-	width: 48%;
+	/*width: 48%;
 	height: 48%;
-	margin-right: 1%;
+	margin-right: 1%;*/
 }
 
 #canvas2 {
-	display: none;
-	width: 48%;
-	height: 48%;
+	/*width: 48%;
+	height: 48%;*/
 	margin-left: 1%;
 }
 

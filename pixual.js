@@ -47,12 +47,12 @@ function endGame () {
 function drawBoxes () {
 	diffx = Math.floor(Math.random()*cols);
 	diffy = Math.floor(Math.random()*rows);
-	
+
 	cw = canvas.width / cols;
 	ch = canvas.height / rows;
-	
+
 	console.log('x: ' + diffx + ' y: '+diffy);
-	
+
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
 			color = getRandomColor();
@@ -87,7 +87,7 @@ function checkClick (event,canvas_ref) {
 }
 
 function getRandomColor() {
-	return 'rgb(' + 
+	return 'rgb(' +
 		((Math.random() * 255)|0) + ',' +
 		((Math.random() * 255)|0) + ',' +
 		((Math.random() * 255)|0) + ')';

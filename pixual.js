@@ -61,7 +61,7 @@ function drawBoxes () {
 	cw = canvas.width / level;
 	ch = canvas.height / level;
 
-	console.log('+ x: ' + diffx + ' y: '+diffy);
+	console.log('Point x: ' + diffx + ' y: '+diffy);
 
 	for(var y = 0; y < level; y++) {
 		for(var x = 0; x < level; x++) {
@@ -95,7 +95,7 @@ function checkClick (event,canvas_ref) {
 		var clickx = Math.floor(x/cw),
 		clicky = Math.floor(y/ch);
 		
-		console.log('- x: ' + clickx + ' y: '+clicky);
+		console.log('Click x: ' + clickx + ' y: '+clicky);
 
 		if(diffx == clickx & diffy == clicky) {
 			levelUp();

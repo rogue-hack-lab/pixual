@@ -60,7 +60,7 @@ function drawBoxes () {
 			ctx.fillRect(x * cw, y * ch, cw, ch);
 			if( x == diffx & y == diffy){
 				//color = getRandomColor();
-				color = getRandomColorWebsafe();
+				color = getRandomColorWebsafe(color);
 			}
 			ctx2.fillStyle = color;
 			ctx2.fillRect(x * cw, y * ch, cw, ch);
@@ -108,10 +108,13 @@ var webSafeColors = ['00','33','66','99','cc','ff'];
 var random = function() {
 	return Math.floor(Math.random()*6);
 };
-function getRandomColorWebsafe() {
-	var r = webSafeColors[random()];
-	var g = webSafeColors[random()];
-	var b = webSafeColors[random()];
+function getRandomColorWebsafe(color) {
+	do {
+		var r = webSafeColors[random()];
+		var g = webSafeColors[random()];
+		var b = webSafeColors[random()];
+	}
+	while ("#"+r+g+b === color);
 	return "#"+r+g+b;
 };
 

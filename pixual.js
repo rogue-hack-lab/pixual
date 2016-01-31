@@ -87,10 +87,11 @@ function checkClick (event,canvas_ref) {
 }
 
 function getRandomColor() {
-	return 'rgb(' +
-		((Math.random() * 255)|0) + ',' +
-		((Math.random() * 255)|0) + ',' +
-		((Math.random() * 255)|0) + ')';
+	return goldenColors.getHsvGolden(0.99, 0.99).toRgbString();
+	// return 'rgb(' +
+	// 	((Math.random() * 255)|0) + ',' +
+	// 	((Math.random() * 255)|0) + ',' +
+	// 	((Math.random() * 255)|0) + ')';
 }
 
 

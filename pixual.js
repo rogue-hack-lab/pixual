@@ -55,7 +55,8 @@ function drawBoxes () {
 
 	for(var y = 0; y < rows; y++) {
 		for(var x = 0; x < cols; x++) {
-			color = getRandomColorWebsafe();
+			var color;
+			color = getRandomColorWebsafe(color);
 			ctx.fillStyle = color;
 			ctx.fillRect(x * cw, y * ch, cw, ch);
 			if( x == diffx & y == diffy){
@@ -113,6 +114,7 @@ function getRandomColorWebsafe(color) {
 		var r = webSafeColors[random()];
 		var g = webSafeColors[random()];
 		var b = webSafeColors[random()];
+		if ("#"+r+g+b === color) {console.log("DUPLICATE COUGHT");}
 	}
 	while ("#"+r+g+b === color);
 	return "#"+r+g+b;

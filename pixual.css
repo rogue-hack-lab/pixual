@@ -3,10 +3,52 @@ body {
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+.playArea {
+  position: absolute;
+  left:     50%;
+  top:      50%;
+	bottom: 8%;
+	margin: 0 auto;
+	padding-left: .4em;
+	padding-right: .4em;
+}
+
 #canvas {
 	display: none;
+	width: 48%;
+	height: 48%;
+	margin-right: 1%;
 }
 
 #canvas2 {
 	display: none;
+	width: 48%;
+	height: 48%;
+	margin-left: 1%;
+}
+
+#stats {
+	display: none;
+}
+
+.statsBar {
+	width: 100%;
+	height: 8%;
+	opacity: 0.8;
+}
+
+#resetGame {
+	display: none;
+}
+
+#newGame {
+	display: none;
+}
+
+.add-padding {
+	padding: 1%;
+}
+
+.add-border {
+	border: 2px solid #bbb1a7;
 }

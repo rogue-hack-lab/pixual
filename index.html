@@ -9,7 +9,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="media-queries.css">
 	<link rel="stylesheet" href="pixual.css">
 
 	<title>Pixual.io</title>
@@ -68,28 +67,26 @@
 		</div>
 	</nav>
 
-	<div class="container">
-
 		<div class="tab-content">
 			<div class="tab-pane active" id="home">
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-						<h3 class="text-center"><span id="countdown"></span></h3>
-					</div>
+				<div class="container">
 
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-						<h3 class="text-center"><span id="points"></span></h3>
-					</div>
+				<div class="statsBar">
+					<h3 id="stats" class="text-center">Clock: <span id="countdown"></span>&nbsp;&nbsp;&nbsp;Points: <span id="points"></span></h3>
 				</div>
 
-				<div class="row text-center">
-					<input class="btn btn-default" type="button" id="startBtn" value="Start" onclick="startGame()">
+				<div id="playArea">
+					<canvas id="canvas" class="canvass" height="480" width="480"></canvas>
+					<canvas id="canvas2" class="canvass2" height="480" width="480"></canvas>
 				</div>
 
-				<div class="playArea">
-					<canvas id="canvas" class="canvass" height="500" width="500"></canvas>
-					<canvas id="canvas2" class="canvass2" height="500" width="500"></canvas>
+			 </div>
+
+				<div class="row text-center add-padding">
+					<input class="btn btn-default" type="button" id="startGame" value="Start Playing" onclick="startGame()">
+					<input class="btn btn-default" type="button" id="resetGame" value="Reset" onclick="startGame()">
+					<input class="btn btn-default" type="button" id="newGame" value="New Game" onclick="startGame()">
 				</div>
 
 			</div>
@@ -97,9 +94,9 @@
 			<div class="tab-pane" id="about">
 				<div class="row well">
 					<div class="col-md-7 text-center">
-						<h2>WHY</h3>
-							Identify which pixel is different between a pair of canvasses. <br>
-							There is always only one. <br>
+						<h2>HOW TO PLAY</h3>
+							Identify which pixel is different between the two grids. <br>
+							There is always only one that is different. <br>
 							<br>
 					</div>
 					<div class="col-md-5 text-center">
@@ -135,12 +132,9 @@
 			</div>
 		</div>
 
-	</div>
-
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="pixual.js"></script>
-	<script type="text/javascript" src="golden-colors.min.js"></script>
 
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

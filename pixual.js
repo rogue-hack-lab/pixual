@@ -7,7 +7,7 @@ cols = 2,
 elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 0,
-badClickPenalty = 1,
+badClickPenalty = -1,
 score = 0;
 
 var diffx, diffy;
@@ -19,7 +19,11 @@ var random = function() {
 }
 
 function startGame () {
-	$('#startBtn').hide();
+	$('#startGame').hide();
+	$('#newGame').hide();
+	$('#stats').show();
+	$('#resetGame').show();
+	$('#points').html('0');
 	$('#canvas').show();
 	$('#canvas2').show();
 	rows = 2;
@@ -39,14 +43,13 @@ function levelUp() {
 }
 
 function oops () {
-	endTime -= badClickPenalty*1000;
+	endTime += badClickPenalty*1000;
 	updateTimer();
 }
 
 function endGame () {
-	$('#startBtn').show();
-	$('#canvas').hide();
-	$('#canvas2').hide();
+	$('#newGame').show();
+	$('#resetGame').hide();
 }
 
 function drawBoxes () {
@@ -97,7 +100,7 @@ function getRandomColor(color) {
 		var r = webSafeColors[random()];
 		var g = webSafeColors[random()];
 		var b = webSafeColors[random()];
-		if ("#"+r+g+b === color) {console.log("DUPLICATE COUGHT");}
+		if ("#"+r+g+b === color) {console.log("DUPLICATE CAUGHT");}
 	}
 	while ("#"+r+g+b === color);
 	return "#"+r+g+b;
@@ -126,3 +129,33 @@ function countdown( elementName, minutes, seconds ){
 	endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 	updateTimer();
 }
+
+/ * not fully working yet -Mica */
+function resizePlayArea() {
+    var playArea = document.getElementById('playArea');
+    var widthToHeight = 4 / 2;
+    var newWidth = window.innerWidth;
+    var newHeight = window.innerHeight;
+    var newWidthToHeight = newWidth / newHeight;
+
+    if (newWidthToHeight > widthToHeight) {
+        newWidth = newHeight * widthToHeight;
+        playArea.style.height = newHeight + 'px';
+        playArea.style.width = newWidth + 'px';
+    } else {
+        newHeight = newWidth / widthToHeight;
+        playArea.style.width = newWidth + 'px';
+        playArea.style.height = newHeight + 'px';
+    }
+
+    var playCanvas = document.getElementById('canvas');
+    playCanvas.width = newWidth;
+    playCanvas.height = newHeight;
+
+		var playCanvas2 = document.getElementById('canvas2');
+		playCanvas2.width = newWidth;
+		playCanvas2.height = newHeight;
+}
+
+window.addEventListener('resize', resizePlayArea, false);
+window.addEventListener('orientationchange', resizePlayArea, false);

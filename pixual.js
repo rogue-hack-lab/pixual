@@ -7,7 +7,8 @@ elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 0,
 badClickPenalty = -1,
-score = 0;
+score = 0,
+gameActive = false;
 
 var diffx, diffy;
 var element, endTime, hours, mins, msLeft, time;
@@ -17,12 +18,15 @@ var random = function() {
 	return Math.floor(Math.random()*6);
 }
 
+drawBoxes();
+
 function startGame () {
 	$('#startGame').hide();
 	$('#newGame').hide();
 	$('#stats').show();
 	$('#resetGame').show();
 	$('#points').html('0');
+	gameActive = true;
 	$('#canvas').show();
 	$('#canvas2').show();
 	level = 2;
@@ -47,6 +51,7 @@ function oops () {
 function endGame () {
 	$('#newGame').show();
 	$('#resetGame').hide();
+	gameActive = false;
 }
 
 function drawBoxes () {
@@ -56,7 +61,7 @@ function drawBoxes () {
 	cw = canvas.width / level;
 	ch = canvas.height / level;
 
-	//console.log('x: ' + diffx + ' y: '+diffy);
+	console.log('+ x: ' + diffx + ' y: '+diffy);
 
 	for(var y = 0; y < level; y++) {
 		for(var x = 0; x < level; x++) {
@@ -83,12 +88,20 @@ canvas2.addEventListener('click', function(event) {
 }, false);
 
 function checkClick (event,canvas_ref) {
-	var x = event.pageX - canvas_ref.offsetLeft,
-	y = event.pageY - canvas_ref.offsetTop;
-	if(diffx == Math.floor(x/cw) & diffy == Math.floor(y/ch)) {
-		levelUp();
-	}else{
-		oops();
+	if (gameActive == true) {
+		var x = event.pageX - canvas_ref.offsetLeft,
+		y = event.pageY - canvas_ref.offsetTop;
+		
+		var clickx = Math.floor(x/cw),
+		clicky = Math.floor(y/ch);
+		
+		console.log('- x: ' + clickx + ' y: '+clicky);
+
+		if(diffx == clickx & diffy == clicky) {
+			levelUp();
+		}else{
+			oops();
+		}	
 	}
 }
 

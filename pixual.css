@@ -52,3 +52,7 @@ body {
 .add-border {
 	border: 2px solid #bbb1a7;
 }
+
+#footer {
+	padding-top: 1.4em;
+}

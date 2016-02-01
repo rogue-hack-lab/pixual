@@ -67,7 +67,7 @@ function drawBoxes () {
 
 	for(var y = 0; y < level; y++) {
 		for(var x = 0; x < level; x++) {
-			var color;
+			var color = "";
 			color = getRandomColor(color);
 			ctx.fillStyle = color;
 			ctx.fillRect(x * cw, y * ch, cw, ch);
@@ -113,9 +113,13 @@ function getRandomColor(color) {
 		var r = webSafeColors[random()];
 		var g = webSafeColors[random()];
 		var b = webSafeColors[random()];
-		if ("#"+r+g+b === color) {console.log("DUPLICATE CAUGHT");}
+		if (r === color.substring(1,3)||
+				g === color.substring(3,5)||
+				b === color.substring(5,7)) {console.log("DUPLICATE CAUGHT");}
 	}
-	while ("#"+r+g+b === color);
+	while (r === color.substring(1,3)||
+				 g === color.substring(3,5)||
+				 b === color.substring(5,7));
 	return "#"+r+g+b;
 };
 

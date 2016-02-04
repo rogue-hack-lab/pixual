@@ -7,6 +7,7 @@ elemLeft = ctx2.offsetLeft,
 elemTop = ctx2.offsetTop
 goodClickBonus = 5,
 badClickPenalty = -1,
+reDrawPenalty = -10,
 score = 0,
 gameActive = false;
 
@@ -39,7 +40,7 @@ function levelUp() {
 	score += ((level-1) * time.getUTCSeconds());
 	$('#points').html(score);
 	$('#level').html(level);
-	level++;	
+	level++;
 	drawBoxes();
 	endTime += goodClickBonus*1000;
 	updateTimer();
@@ -54,6 +55,11 @@ function endGame () {
 	$('#newGame').show();
 	$('#resetGame').hide();
 	gameActive = false;
+}
+
+function reDraw () {
+	endTime += reDrawPenalty*1000;
+	drawBoxes();
 }
 
 function drawBoxes () {
@@ -93,10 +99,10 @@ function checkClick (event,canvas_ref) {
 	if (gameActive == true) {
 		var x = event.pageX - canvas_ref.offsetLeft,
 		y = event.pageY - canvas_ref.offsetTop;
-		
+
 		var clickx = Math.floor(x/cw),
 		clicky = Math.floor(y/ch);
-		
+
 		//console.log('Click x: ' + clickx + ' y: '+clicky);
 		console.log('Click x: ' + clickx + '=floor('+x+'/'+cw+') y: '+clicky + '=floor('+y+'/'+ch+')');
 
@@ -104,7 +110,7 @@ function checkClick (event,canvas_ref) {
 			levelUp();
 		}else{
 			oops();
-		}	
+		}
 	}
 }
 

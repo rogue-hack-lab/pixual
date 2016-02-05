@@ -100,6 +100,7 @@ canvas2.addEventListener('click', function(event) {
 //events triggered on key press
 //32 == spacebar
 //27 == escape
+//192== tilde
 document.onkeydown = function(e) {
 	e = e || window.event;
 	if (gameActive == true) {
@@ -107,12 +108,14 @@ document.onkeydown = function(e) {
 			case 32:
 				e.preventDefault();
 				reDraw(); break;
-			case 27:
+			//case 27:
+			case 192:
 				endGame(); break;
 		}
 	} else {
 		switch (e.keyCode) {
-			case 27:
+			//case 27:
+			case 192:
 				e.preventDefault();
 				startGame(); break;
 		}

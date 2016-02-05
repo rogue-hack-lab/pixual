@@ -55,6 +55,7 @@ function endGame () {
 	$('#newGame').show();
 	$('#resetGame').hide();
 	gameActive = false;
+	element.innerHTML = "countdown's over!";
 }
 
 function reDraw () {
@@ -95,6 +96,30 @@ canvas2.addEventListener('click', function(event) {
 	checkClick(event,this);
 }, false);
 
+///////////////////////////////
+//events triggered on key press
+//32 == spacebar
+//27 == escape
+document.onkeydown = function(e) {
+	e = e || window.event;
+	if (gameActive == true) {
+		switch (e.keyCode) {
+			case 32:
+				e.preventDefault();
+				reDraw(); break;
+			case 27:
+				endGame(); break;
+		}
+	} else {
+		switch (e.keyCode) {
+			case 32:
+				e.preventDefault();
+				startGame(); break;
+		}
+	}
+}
+
+
 function checkClick (event,canvas_ref) {
 	if (gameActive == true) {
 		var x = event.pageX - canvas_ref.offsetLeft,
@@ -104,7 +129,7 @@ function checkClick (event,canvas_ref) {
 		clicky = Math.floor(y/ch);
 
 		//console.log('Click x: ' + clickx + ' y: '+clicky);
-		console.log('Click x: ' + clickx + '=floor('+x+'/'+cw+') y: '+clicky + '=floor('+y+'/'+ch+')');
+		//console.log('Click x: ' + clickx + '=floor('+x+'/'+cw+') y: '+clicky + '=floor('+y+'/'+ch+')');
 
 		if(diffx == clickx & diffy == clicky) {
 			levelUp();
@@ -114,7 +139,7 @@ function checkClick (event,canvas_ref) {
 	}
 }
 
-function getRandomColor(color) {
+function getRandomColor (color) {
 	do {
 		var r = webSafeColors[random()];
 		var g = webSafeColors[random()];
@@ -129,16 +154,15 @@ function getRandomColor(color) {
 	return "#"+r+g+b;
 };
 
-function twoDigits( n ){
+function twoDigits (n) {
 	return (n <= 9 ? "0" + n : n);
 }
 
 function updateTimer(){
 	msLeft = endTime - (+new Date);
 	if ( msLeft < 1000 ) {
-		element.innerHTML = "countdown's over!";
 		endGame();
-	} else {
+	} else if (gameActive == true) {
 		time = new Date( msLeft );
 		hours = time.getUTCHours();
 		mins = time.getUTCMinutes();
@@ -147,44 +171,44 @@ function updateTimer(){
 	}
 }
 
-function countdown( elementName, minutes, seconds ){
+function countdown (elementName, minutes, seconds){
 	element = document.getElementById( elementName );
 	endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 	updateTimer();
 }
 
 / * not fully working yet -Mica */
-function resizePlayArea() {
-    // var playArea = document.getElementById('playArea');
-    // var widthToHeight = 4 / 2;
-    // var newWidth = window.innerWidth;
-    // var newHeight = window.innerHeight;
-    // var newWidthToHeight = newWidth / newHeight;
+function resizePlayArea () {
+		// var playArea = document.getElementById('playArea');
+		// var widthToHeight = 4 / 2;
+		// var newWidth = window.innerWidth;
+		// var newHeight = window.innerHeight;
+		// var newWidthToHeight = newWidth / newHeight;
 
-    // if (newWidthToHeight > widthToHeight) {
-    //     newWidth = newHeight * widthToHeight;
-    //     playArea.style.height = newHeight + 'px';
-    //     playArea.style.width = newWidth + 'px';
-    // } else {
-    //     newHeight = newWidth / widthToHeight;
-    //     playArea.style.width = newWidth + 'px';
-    //     playArea.style.height = newHeight + 'px';
-    // }
+		// if (newWidthToHeight > widthToHeight) {
+		//		 newWidth = newHeight * widthToHeight;
+		//		 playArea.style.height = newHeight + 'px';
+		//		 playArea.style.width = newWidth + 'px';
+		// } else {
+		//		 newHeight = newWidth / widthToHeight;
+		//		 playArea.style.width = newWidth + 'px';
+		//		 playArea.style.height = newHeight + 'px';
+		// }
 
-    if (window.innerWidth > window.innerHeight) {
-    	var size = window.innerWidth*0.40;
-    }else{
-    	var size = window.innerHeight*0.40;
-    };
+		if (window.innerWidth > window.innerHeight) {
+			var size = window.innerWidth*0.40;
+		}else{
+			var size = window.innerHeight*0.40;
+		};
 
-    canvas.width = size;
-    canvas.height = size;
-    canvas2.width = size;
-    canvas2.height = size;
+		canvas.width = size;
+		canvas.height = size;
+		canvas2.width = size;
+		canvas2.height = size;
 
-    drawBoxes();
+		drawBoxes();
 
 }
 
-window.addEventListener('resize', resizePlayArea, false);
-window.addEventListener('orientationchange', resizePlayArea, false);
+window.addEventListener ('resize', resizePlayArea, false);
+window.addEventListener ('orientationchange', resizePlayArea, false);

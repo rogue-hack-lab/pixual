@@ -112,7 +112,7 @@ document.onkeydown = function(e) {
 		}
 	} else {
 		switch (e.keyCode) {
-			case 32:
+			case 27:
 				e.preventDefault();
 				startGame(); break;
 		}

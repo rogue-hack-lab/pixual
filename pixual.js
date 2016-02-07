@@ -29,11 +29,11 @@ function startGame () {
 	$('#newGame').hide();
 	$('#stats').show();
 	$('#resetGame').show();
-	$('#points').html('0');
-	$('#level').html('0');
-	gameActive = true;
-	level = 2;
 	score = 0;
+	$('#points').html(score);
+	level = 1;
+	$('#level').html(level);
+	gameActive = true;
 	makeBoxes();
 	drawBoxes();
 	countdown( "countdown", 1, 0 );
@@ -41,10 +41,10 @@ function startGame () {
 
 function levelUp() {
 	time = new Date( msLeft );
-	score += ((level-1) * time.getUTCSeconds());
+	score += ((level) * time.getUTCSeconds());
 	$('#points').html(score);
-	$('#level').html(level);
 	level++;
+	$('#level').html(level);
 	makeBoxes();
 	drawBoxes();
 	endTime += goodClickBonus*1000;
@@ -71,14 +71,14 @@ function reDraw () {
 }
 
 function makeBoxes () {
-	diffx = Math.floor(Math.random()*level);
-	diffy = Math.floor(Math.random()*level);
+	diffx = Math.floor(Math.random()*(level+1));
+	diffy = Math.floor(Math.random()*(level+1));
 
 	
-	for(var x = 0; x < level; x++) {
+	for(var x = 0; x < (level+1); x++) {
 		gameBord1[x] = [];
 		gameBord2[x] = [];
-		for(var y = 0; y < level; y++) {
+		for(var y = 0; y < (level+1); y++) {
 			var color = "";
 			gameBord1[x][y] = getRandomColor(color);
 			if( x == diffx & y == diffy){
@@ -94,11 +94,11 @@ function makeBoxes () {
 
 function drawBoxes () {
 
-	cw = canvas.width / level;
-	ch = canvas.height / level;
+	cw = canvas.width / (level+1);
+	ch = canvas.height / (level+1);
 
-	for(var y = 0; y < level; y++) {
-		for(var x = 0; x < level; x++) {
+	for(var y = 0; y < (level+1); y++) {
+		for(var x = 0; x < (level+1); x++) {
 
 			ctx.fillStyle = gameBord1[x][y];
 			ctx.fillRect(x * cw, y * ch, cw, ch);

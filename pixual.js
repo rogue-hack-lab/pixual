@@ -9,7 +9,9 @@ goodClickBonus = 5,
 badClickPenalty = -1,
 reDrawPenalty = -10,
 score = 0,
-gameActive = false;
+gameActive = false,
+gameBord1 = Array(),
+gameBord2 = Array();
 
 var diffx, diffy;
 var element, endTime, hours, mins, msLeft, time;
@@ -19,6 +21,7 @@ var random = function() {
 	return Math.floor(Math.random()*6);
 }
 
+makeBoxes();
 resizePlayArea();
 
 function startGame () {
@@ -31,6 +34,7 @@ function startGame () {
 	gameActive = true;
 	level = 2;
 	score = 0;
+	makeBoxes();
 	drawBoxes();
 	countdown( "countdown", 1, 0 );
 }
@@ -41,6 +45,7 @@ function levelUp() {
 	$('#points').html(score);
 	$('#level').html(level);
 	level++;
+	makeBoxes();
 	drawBoxes();
 	endTime += goodClickBonus*1000;
 	updateTimer();
@@ -56,36 +61,66 @@ function endGame () {
 	$('#resetGame').hide();
 	gameActive = false;
 	element.innerHTML = "countdown's over!";
+	hilightDiff();
 }
 
 function reDraw () {
 	endTime += reDrawPenalty*1000;
+	makeBoxes();
 	drawBoxes();
 }
 
-function drawBoxes () {
+function makeBoxes () {
 	diffx = Math.floor(Math.random()*level);
 	diffy = Math.floor(Math.random()*level);
+
+	console.log('Point x: ' + diffx + ' y: '+diffy);
+	
+	for(var x = 0; x < level; x++) {
+		gameBord1[x] = [];
+		gameBord2[x] = [];
+		for(var y = 0; y < level; y++) {
+			var color = "";
+			gameBord1[x][y] = getRandomColor(color);
+			if( x == diffx & y == diffy){
+				gameBord2[x][y] = getRandomColor(gameBord1[x][y]);
+			}else{
+				gameBord2[x][y] = gameBord1[x][y];
+			}
+
+			console.log(gameBord1[x][y]+' '+gameBord2[x][y])
+		}
+	}
+}
+
+function drawBoxes () {
 
 	cw = canvas.width / level;
 	ch = canvas.height / level;
 
-	console.log('Point x: ' + diffx + ' y: '+diffy);
-
 	for(var y = 0; y < level; y++) {
 		for(var x = 0; x < level; x++) {
-			var color = "";
-			color = getRandomColor(color);
-			ctx.fillStyle = color;
+
+			ctx.fillStyle = gameBord1[x][y];
 			ctx.fillRect(x * cw, y * ch, cw, ch);
-			if( x == diffx & y == diffy){
-				//color = getRandomColor();
-				color = getRandomColor(color);
-			}
-			ctx2.fillStyle = color;
+
+			ctx2.fillStyle = gameBord2[x][y];
 			ctx2.fillRect(x * cw, y * ch, cw, ch);
+
 		}
 	}
+	
+}
+
+function hilightDiff () {
+
+	ctx.beginPath();
+	ctx.arc((diffx*cw)+(cw/2), (diffy*ch)+(ch/2), Math.sqrt(Math.pow(cw, 2))/Math.sqrt(2), 0, 2 * Math.PI);
+	ctx.stroke();
+	
+	ctx2.beginPath();
+	ctx2.arc((diffx*cw)+(cw/2), (diffy*ch)+(ch/2), Math.sqrt(Math.pow(cw, 2))/Math.sqrt(2), 0, 2 * Math.PI);
+	ctx2.stroke();
 }
 
 canvas.addEventListener('click', function(event) {

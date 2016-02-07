@@ -74,7 +74,6 @@ function makeBoxes () {
 	diffx = Math.floor(Math.random()*level);
 	diffy = Math.floor(Math.random()*level);
 
-	console.log('Point x: ' + diffx + ' y: '+diffy);
 	
 	for(var x = 0; x < level; x++) {
 		gameBord1[x] = [];
@@ -87,10 +86,10 @@ function makeBoxes () {
 			}else{
 				gameBord2[x][y] = gameBord1[x][y];
 			}
-
-			console.log(gameBord1[x][y]+' '+gameBord2[x][y])
 		}
 	}
+	
+	console.log('Point x: ' + diffx + ' y: '+diffy + ' c1: ' +gameBord1[diffx][diffy]+' c2: '+gameBord2[diffx][diffy]);
 }
 
 function drawBoxes () {
